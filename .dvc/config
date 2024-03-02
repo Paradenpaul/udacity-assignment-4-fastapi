@@ -1,0 +1,4 @@
+[core]
+    remote = datastorage
+['remote "datastorage"']
+    url = /home/paradenpaul/udacity/assignment-4/datastorage
