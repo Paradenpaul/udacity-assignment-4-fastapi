@@ -1,0 +1,7 @@
+marital-status=Never-married: Precision=0.4009111617312073, Recall=0.35845213849287166, F1=0.37849462365591396
+marital-status=Married-civ-spouse: Precision=0.8242303872889771, Recall=0.24805738194859533, F1=0.381346198024351
+marital-status=Divorced: Precision=0.5526315789473685, Recall=0.3174946004319654, F1=0.4032921810699589
+marital-status=Married-spouse-absent: Precision=0.5555555555555556, Recall=0.29411764705882354, F1=0.3846153846153846
+marital-status=Separated: Precision=0.5, Recall=0.3484848484848485, F1=0.41071428571428575
+marital-status=Married-AF-spouse: Precision=1.0, Recall=0.1, F1=0.18181818181818182
+marital-status=Widowed: Precision=0.5172413793103449, Recall=0.35294117647058826, F1=0.41958041958041964

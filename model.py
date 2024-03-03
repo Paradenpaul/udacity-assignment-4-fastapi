@@ -1,6 +1,8 @@
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import fbeta_score, precision_score, recall_score
 
+
+# -------------- MODEL TRAINING ----------------
 def train_model(X_train, y_train):
     """
     Trains a Logistic Regression machine learning model and returns it.
@@ -20,6 +22,8 @@ def train_model(X_train, y_train):
     model.fit(X_train, y_train)
     return model
 
+
+# ----------- MODEL METRICS --------------
 def compute_model_metrics(y, preds):
     """
     Validates the trained machine learning model using precision, recall, and F1.
@@ -39,8 +43,11 @@ def compute_model_metrics(y, preds):
     precision = precision_score(y, preds, zero_division=1)
     recall = recall_score(y, preds, zero_division=1)
     fbeta = fbeta_score(y, preds, beta=1, zero_division=1)
+
     return precision, recall, fbeta
 
+
+# -------------- INFERENCE ----------------------
 def inference(model, X):
     """
     Run model inferences and return the predictions.
@@ -57,3 +64,4 @@ def inference(model, X):
     """
     preds = model.predict(X)
     return preds
+
