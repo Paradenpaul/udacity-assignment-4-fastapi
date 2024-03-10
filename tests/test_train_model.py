@@ -17,24 +17,17 @@ from model import train_model, compute_model_metrics, inference
 # ---- CREATE FIXTURES ---------
 @pytest.fixture(scope="module")
 def load_data():
-    
-    # gives the path of demo.py 
-    path = os.path.realpath(__file__) 
-   
-    # gives the directory where demo.py  
-    # exists 
-    dir = os.path.dirname(path) 
-  
-    # replaces folder name of Sibling_1 to  
-    # Sibling_2 in directory 
-    dir = dir.replace('tests', 'data') 
-  
-    # changes the current directory to  
-    #  Sibling_2 folder 
-    os.chdir(dir)  
-  
-    # import the data fixture 
-    data = pd.read_csv(os.path.join(dir, "census_cleaned.csv"))
+    # Path to the directory of this file
+    dir_path = os.path.dirname(os.path.realpath(__file__))
+
+    # Construct the path to the data directory
+    data_dir = os.path.join(dir_path, '..', 'data')
+
+    # Path to the census_cleaned.csv file
+    data_path = os.path.join(data_dir, "census_cleaned.csv")
+
+    # Import the data
+    data = pd.read_csv(data_path)
     return data
 
 
