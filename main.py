@@ -22,6 +22,7 @@ encoder = joblib.load(encoder_path)  # Example for categorical encoding
 class PredictionItem(BaseModel):
     age: int
     workclass: str
+    fnlgt: int
     education: str
     education_num: int
     marital_status: str
@@ -55,7 +56,7 @@ async def make_prediction(item: PredictionItem = Body(...)):
         categorical_features = ['workclass', 'education', 'marital_status', 'occupation', 'relationship', 'race', 'sex', 'native_country']
         
         # Assuming these are your numerical features based on the earlier model description
-        numerical_features = ['age', 'education_num', 'capital_gain', 'capital_loss', 'hours_per_week']
+        numerical_features = ['age', 'fnlgt', 'education_num', 'capital_gain', 'capital_loss', 'hours_per_week']
         
         # Extract and prepare categorical data for encoding
         categorical_data = [input_data[feature] for feature in categorical_features]
@@ -68,7 +69,7 @@ async def make_prediction(item: PredictionItem = Body(...)):
         numerical_data = np.array([input_data[feature] for feature in numerical_features]).reshape(1, -1)
         
         # Combine encoded categorical data with numerical data for the model input
-        model_input = np.concatenate((numerical_data, encoded_categorical_data, np.array([[0]])), axis=1)
+        model_input = np.concatenate([numerical_data, encoded_categorical_data], axis=1)
         
         # Make prediction
         prediction = model.predict(model_input)

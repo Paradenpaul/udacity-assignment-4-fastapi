@@ -25,7 +25,8 @@ def test_predict_income_greater_than_50k():
     # Example data expected to predict "Income > 50K"
     data = {
         "age": 52,
-        "workclass": "Private",   ##Private,193524,Doctorate,16,Married-civ-spouse,Prof-specialty,Husband,White,Male,0,0,60,United-States,>50K
+        "workclass": "Private",
+        "fnlgt": 23453,  
         "education": "Doctorate",
         "education_num": 16,
         "marital_status": "Married-civ-spouse",
@@ -33,7 +34,7 @@ def test_predict_income_greater_than_50k():
         "relationship": "Husband",
         "race": "White",
         "sex": "Male",
-        "capital_gain": 5000,
+        "capital_gain": 10000,
         "capital_loss": 0,
         "hours_per_week": 60,
         "native_country": "United-States"
@@ -48,6 +49,7 @@ def test_predict_income_less_or_equal_50k():
     data = {
         "age": 25,
         "workclass": "Private",
+        "fnlgt": 23453,  
         "education": "Some-college",
         "education_num": 10,
         "marital_status": "Never-married",
