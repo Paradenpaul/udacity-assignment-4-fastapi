@@ -1,10 +1,8 @@
-import sys
 import os
 import joblib
 import numpy as np
-from typing import Optional
 from fastapi import FastAPI, Body, HTTPException
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 
 app = FastAPI()
 
@@ -30,7 +28,7 @@ class PredictionItem(BaseModel):
     relationship: str
     race: str
     sex: str
-    capital_gain: int 
+    capital_gain: int
     capital_loss: int
     hours_per_week: int
     native_country: str
@@ -51,26 +49,45 @@ async def make_prediction(item: PredictionItem = Body(...)):
     try:
         # Convert Pydantic model to dict
         input_data = item.dict()
-    
+
         # Categorical features for encoding
-        categorical_features = ['workclass', 'education', 'marital_status', 'occupation', 'relationship', 'race', 'sex', 'native_country']
-        
-        # Assuming these are your numerical features based on the earlier model description
-        numerical_features = ['age', 'fnlgt', 'education_num', 'capital_gain', 'capital_loss', 'hours_per_week']
-        
+        categorical_features = [
+            'workclass',
+            'education',
+            'marital_status',
+            'occupation',
+            'relationship',
+            'race',
+            'sex',
+            'native_country']
+
+        # Assuming these are your numerical features based on the earlier model
+        # description
+        numerical_features = [
+            'age',
+            'fnlgt',
+            'education_num',
+            'capital_gain',
+            'capital_loss',
+            'hours_per_week']
+
         # Extract and prepare categorical data for encoding
-        categorical_data = [input_data[feature] for feature in categorical_features]
+        categorical_data = [input_data[feature]
+                            for feature in categorical_features]
         categorical_data_reshaped = np.array([categorical_data]).reshape(1, -1)
-        
+
         # Encode the categorical data
         encoded_categorical_data = encoder.transform(categorical_data_reshaped)
-        
+
         # Extract numerical data
-        numerical_data = np.array([input_data[feature] for feature in numerical_features]).reshape(1, -1)
-        
-        # Combine encoded categorical data with numerical data for the model input
-        model_input = np.concatenate([numerical_data, encoded_categorical_data], axis=1)
-        
+        numerical_data = np.array([input_data[feature]
+                                  for feature in numerical_features]).reshape(1, -1)
+
+        # Combine encoded categorical data with numerical data for the model
+        # input
+        model_input = np.concatenate(
+            [numerical_data, encoded_categorical_data], axis=1)
+
         # Make prediction
         prediction = model.predict(model_input)
 
