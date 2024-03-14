@@ -41,10 +41,10 @@ def evaluate_model_on_slices(
 
 def MLapp():
 
-    # Load your dataset
+    # Load the dataset
     df = pd.read_csv('data/census_cleaned.csv')
 
-    # Define your features and label
+    # Define the features and the label
     cat_features = [
         "workclass",
         "education",
@@ -91,9 +91,8 @@ def MLapp():
     joblib.dump(encoder, 'model/encoder.joblib')
     joblib.dump(lb, 'model/label_binarizer.joblib')
 
-    # Assuming `df` is your DataFrame, `model` is your trained model,
-    # `encoder` and `lb` are fitted OneHotEncoder and LabelBinarizer from your training phase
-    feature_to_slice = 'workclass'  # The feature you're evaluating
+    # Slice for diagnosis
+    feature_to_slice = 'workclass'  
 
     slice_results = evaluate_model_on_slices(
         df, feature_to_slice, model, encoder, lb, cat_features)

@@ -6,7 +6,7 @@ from pydantic import BaseModel
 
 app = FastAPI()
 
-# Load your trained model and any necessary preprocessors
+# Load the trained model and any necessary preprocessors
 # Path to the directory of this file
 current_dir = os.path.dirname(os.path.abspath(__file__))
 model_path = os.path.join(current_dir, "model", "trained_model.joblib")
@@ -61,7 +61,7 @@ async def make_prediction(item: PredictionItem = Body(...)):
             'sex',
             'native_country']
 
-        # Assuming these are your numerical features based on the earlier model
+        # numerical features based on the earlier model
         # description
         numerical_features = [
             'age',
