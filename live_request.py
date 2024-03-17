@@ -1,7 +1,7 @@
 import requests
 
 
-base_url = 'https://udacity-assignment-4-fastapi.onrender.com'
+url = 'https://udacity-assignment-4-fastapi.onrender.com/predict/'
 data = {
     "age": 39,
     "workclass": "State-gov",
@@ -20,11 +20,8 @@ data = {
 }
 
 # POST request to the /predict/ endpoint
-predict_url = f'{base_url}/predict/'
-response = requests.post(predict_url, json=data)
-print("POST /predict/ response:", response.json())
+response = requests.post(url, json=data)
 
-# GET request to the root endpoint
-root_url = base_url + '/'
-root_response = requests.get(root_url)
-print("GET / status code:", root_response.status_code)
+# Print both the JSON response and the status code of the POST request
+print("Model inference result:", response.json())
+print("Status code of /predict/:", response.status_code)
