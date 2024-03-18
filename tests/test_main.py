@@ -3,6 +3,7 @@
 import os
 import sys
 import inspect
+
 from fastapi.testclient import TestClient
 
 currentdir = os.path.dirname(
@@ -12,7 +13,12 @@ currentdir = os.path.dirname(
 parentdir = os.path.dirname(currentdir)
 sys.path.insert(0, parentdir)
 
-from main import app
+from main import app, load_model_and_encoder
+
+
+# ------------- LOAD MODEL AND TEST CLIENT -----------------
+# Manually load the model and encoder before tests
+load_model_and_encoder()
 client = TestClient(app)
 
 

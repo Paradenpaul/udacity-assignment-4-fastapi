@@ -10,14 +10,19 @@ app = FastAPI()
 model = None
 encoder = None
 
-@app.on_event("startup")
-async def startup_event():
+def load_model_and_encoder():
+    """Function to explicitly load the model and encoder."""
     global model, encoder
     current_dir = os.path.dirname(os.path.abspath(__file__))
     model_path = os.path.join(current_dir, "model", "trained_model.joblib")
     encoder_path = os.path.join(current_dir, "model", "encoder.joblib")
     model = joblib.load(model_path)
     encoder = joblib.load(encoder_path)
+
+@app.on_event("startup")
+async def startup_event():
+    """Event handler to load the model and encoder at app startup."""
+    load_model_and_encoder()
 
 # Function to convert hyphens to underscores
 def hyphen_to_underscore(field_name: str) -> str:
