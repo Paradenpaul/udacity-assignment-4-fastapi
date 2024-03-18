@@ -4,6 +4,7 @@ url = 'http://localhost:8000/predict/'
 data = {
     "age": 39,
     "workclass": "State-gov",
+    "fnlgt": 2345,
     "education": "Bachelors",
     "education_num": 13,
     "marital_status": "Never-married",
